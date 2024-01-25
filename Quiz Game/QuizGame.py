@@ -1,5 +1,4 @@
 import random
-
 class QuizGame:
     def __init__(self, questions):
         self.questions = questions
@@ -13,19 +12,17 @@ class QuizGame:
     def present_quiz_questions(self):
         for index, question in enumerate(self.questions, start=1):
             print(f"Question {index}: {question['text']}")
-            
             if 'options' in question:
                 for option_index, option in enumerate(question['options'], start=1):
-                    print(f"{option_index}. {option}")
-
-                user_choice = input("Enter the number of your choice: ")
+                    print(f"{chr(64+option_index)}. {option}")
+                usi = input("Enter your choice: ")
+                user_choice=str(ord(usi) - 64)
                 if user_choice.isdigit() and 1 <= int(user_choice) <= len(question['options']):
                     user_answer = question['options'][int(user_choice) - 1]
                 else:
                     user_answer = None
             else:
                 user_answer = input("Your Answer: ")
-
             self.evaluate_user_response(user_answer, question['answer'])
 
     def evaluate_user_response(self, user_answer, correct_answer):

@@ -1,62 +1,66 @@
 class ToDoList:
     def __init__(self):
-        self.tasks = []
-
-    def add_task(self, task):
-        self.tasks.append(task)
-        print(f"Task '{task}' added successfully.")
-
+        self.tasks = {}
+        
+    def Add_task(self,taskName,task):
+        self.tasks[taskName] = task
+        print(f"\n             Task - '{task}' Add successfully.")
+        
     def view_tasks(self):
         if not self.tasks:
             print("No tasks found.")
         else:
-            print("Tasks:")
-            for index, task in enumerate(self.tasks, start=1):
-                print(f"{index}. {task}")
-
+            print("        Tasks Are      ")
+            for index, task in self.tasks.items():
+                print(f"Name: {index} => Task: {task}")
     def mark_completed(self, task_index):
-        if 1 <= task_index <= len(self.tasks):
-            completed_task = self.tasks.pop(task_index - 1)
-            print(f"Task '{completed_task}' marked as completed.")
+        if task_index in self.tasks:
+            print(f"   '{self.tasks[task_index]}' Tasks completed.")
         else:
-            print("Invalid task index. Please enter a valid index.")
-
+            print("Invalid task Name. Please enter a valid Name.")
+        
     def delete_task(self, task_index):
-        if 1 <= task_index <= len(self.tasks):
-            deleted_task = self.tasks.pop(task_index - 1)
-            print(f"Task '{deleted_task}' deleted successfully.")
+        if task_index in self.tasks:
+            del self.tasks[task_index]
+            print("\nTask Deleted Successfully !")
         else:
             print("Invalid task index. Please enter a valid index.")
+        
+        
+
+
 
 def main():
-    todo_list = ToDoList()
-
+    todo = ToDoList()
+    
     while True:
-        print("\nTo-Do List Menu:")
-        print("1. Add Task")
-        print("2. View Tasks")
-        print("3. Mark Task as Completed")
-        print("4. Delete Task")
-        print("5. Exit")
-
-        choice = input("Enter your choice (1-5): ")
-
-        if choice == '1':
-            task = input("Enter the task: ")
-            todo_list.add_task(task)
-        elif choice == '2':
-            todo_list.view_tasks()
-        elif choice == '3':
-            task_index = int(input("Enter the index of the task to mark as completed: "))
-            todo_list.mark_completed(task_index)
-        elif choice == '4':
-            task_index = int(input("Enter the index of the task to delete: "))
-            todo_list.delete_task(task_index)
-        elif choice == '5':
-            print("Exiting the To-Do List application. Goodbye!")
-            break
+        print("\n Hi every one!")
+        print("1.Add")
+        print("2.view")
+        print("3.make task")
+        print("4.Delete Task")
+        print("5.Exist")
+        
+        ch = input("\nEnter your chose: ")
+        
+        if ch == '1':
+            taskName = input("\nEnter the task Name: \n")
+            task = input("Enter the task: \n")
+            todo.Add_task(taskName,task)
+        elif ch == '2':
+            todo.view_tasks()
+        elif ch == '3':
+                task_index = input("\nEnter the Name of the task to mark as completed: ")
+                todo.mark_completed(task_index)
+        elif ch == '4':
+            option = input("\nDo you want to Delete (Yes/No): ")
+            if option == 'Yes':
+                task_index = input("\nEnter the Name of the task to Delete : ")
+                todo.delete_task(task_index)
+            elif option == 'No':
+                print("\nOK It DONE !")
         else:
-            print("Invalid choice. Please enter a valid option.")
+            break
+       
 
-if __name__ == "__main__":
-    main()
+main()

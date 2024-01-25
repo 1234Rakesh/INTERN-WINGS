@@ -1,25 +1,29 @@
-import random
-import string
+#TASK -2  `PASSWORD GENERATOR`
+import string 
+import random 
 
-def generate_password(length):
-    characters = string.ascii_letters + string.digits + string.punctuation
-    password = ''.join(random.choice(characters) for _ in range(length))
-    return password
+char = list(string.ascii_letters + string.digits + "!@#$^&*")
+def generate_pass():
+    password_len = int(input("How long would you like your password to be? "))
 
-def password_generator():
-    print("Password Generator")
-    try:
-        length = int(input("Enter the preferred password length: "))
-        if length <= 0:
-            print("Please enter a valid positive length.")
-            return
-    except ValueError:
-        print("Invalid input. Please enter a valid number.")
-        return
-
-    password = generate_password(length)
-    print(f"Generated Password: {password}")
-    print(int(password))
-
-if __name__ == "__main__":
-    password_generator()
+    random.shuffle(char)
+    password =[]
+    
+    for x in range(password_len + 1):
+        password.append(random.choice(char))
+        
+    random.shuffle(password)
+    
+    password = "".join(password)
+    
+    print("Your Password = ",password)
+    
+option = input("Do you want to generate a password? (Yes/No): ")
+if option == 'Yes':
+   generate_pass()
+elif option == 'No':
+    print("Bye!") 
+    exit()
+else:
+    print("Invelaide Inpit ")
+    exit()
